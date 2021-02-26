@@ -49,3 +49,35 @@ Finally, update your .bashrc script with the information about the new workspace
 $ echo "source ~/catkin_ws/devel/setup.bash" >> ~/.bashrc 
 $ source ~/.bashrc
 Your catkin workspace is now ready to compile your ROS packages from source directly onto the Jetson Nano.
+
+
+Getting Started with ZED stereo camera on Jetson Nano
+How can a robot be autonomous without perceiving the world? The ZED and ZED Mini 3D depth cameras are the ideal companions for a Jetson Nano and ROS-powered robot.
+
+To get your ZED running with ROS on Nano, go to the source folder of the catkin workspace that you just created:
+
+$ cd ~/catkin_ws/src
+Clone the ZED ROS wrapper Github repository. The ZED wrapper allows you to add real-time depth sensing, stereo visual odometry, and 3D SLAM to your autonomous robot.
+
+$ git clone https://github.com/stereolabs/zed-ros-wrapper.git
+Check the dependencies:
+
+$ cd ~/catkin_ws
+$ rosdep install --from-paths src --ignore-src -r -y
+The rosdep command explores all the packages available in the src folder and verifies that all the declared dependencies are available, automatically installing the missing ones.
+
+Compile the ZED ROS wrapper:
+
+$ catkin_make -DCMAKE_BUILD_TYPE=Release
+You can now visualize the video and depth data that your ZED camera captures using this simple command:
+
+$ roslaunch zed_display_rviz display.launch
+For ZED Mini:
+
+$ roslaunch zed_display_rviz display_zedm.launch 
+
+For more information on using the ZED ROS wrapper, read our Getting Started guide.
+
+If you need help with setting up ROS on your Jetson Nano or using your ZED stereo camera, don’t hesitate to contact us on the support portal or Github issue system.
+
+
